@@ -45,14 +45,15 @@
                             <div class="card">
                                 <h5 class="card-header">TIPO DO PÃO</h5>
                                 <div class="card-body">
+                                    {{inputTipoPao}}
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" value="gergelim" v-model="inputTipoPao">
                                         <label class="form-check-label" >
                                           Gergelim
                                         </label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" value="australiano" v-model="inputTipoPao">
                                         <label class="form-check-label" >
                                           Australiano
                                         </label>
@@ -86,19 +87,19 @@
                                 <h5 class="card-header">MOLHOS</h5>
                                 <div class="card-body">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" >
+                                        <input class="form-check-input" type="checkbox">
                                         <label class="form-check-label">
                                           Ketchup
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" >
+                                        <input class="form-check-input" type="checkbox">
                                         <label class="form-check-label">
                                           Mostarda
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" >
+                                        <input class="form-check-input" type="checkbox">
                                         <label class="form-check-label">
                                           Maionese
                                         </label>
@@ -146,9 +147,22 @@
     <script>
         const vm = new Vue({
             el: '#app',
+            data: {
+                inputTipoPao:''
+            },
             computed: {
                 pao(){
-                    return ['imagens/padrao/pao_superior.png','imagens/padrao/pao_inferior.png']
+                    switch(this.inputTipoPao){
+                        case 'gergelim':
+                            return['imagens/pao_gergelim_superior.png','imagens/pao_gergelim_inferior.png']
+
+                        case 'australiano':
+                            return['imagens/pao_australiano_superior.png','imagens/pao_australiano_inferior.png']
+                        default:
+
+                        return ['imagens/padrao/pao_superior.png','imagens/padrao/pao_inferior.png']
+                    }
+
                 },
                 alface(){
                     return 'imagens/padrao/alface.png'
