@@ -45,7 +45,6 @@
                             <div class="card">
                                 <h5 class="card-header">TIPO DO PÃO</h5>
                                 <div class="card-body">
-                                    {{inputTipoPao}}
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" value="gergelim" v-model="inputTipoPao">
                                         <label class="form-check-label" >
@@ -70,7 +69,7 @@
                                 <h5 class="card-header">SALADAS</h5>
                                 <div class="card-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" >
+                                        <input class="form-check-input" type="checkbox" value="alface" v-model="inputSaladas">
                                         <label class="form-check-label">
                                           Alface
                                         </label>
@@ -87,19 +86,19 @@
                                 <h5 class="card-header">MOLHOS</h5>
                                 <div class="card-body">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox">
+                                        <input class="form-check-input" type="checkbox" value="ketchup" v-model="inputMolhos">
                                         <label class="form-check-label">
                                           Ketchup
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox">
+                                        <input class="form-check-input" type="checkbox" value="mostarda" v-model="inputMolhos">
                                         <label class="form-check-label">
                                           Mostarda
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox">
+                                        <input class="form-check-input" type="checkbox" value="maionese" v-model="inputMolhos">
                                         <label class="form-check-label">
                                           Maionese
                                         </label>
@@ -116,19 +115,19 @@
                                 <h5 class="card-header">HAMBÚRGUER</h5>
                                 <div class="card-body">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" value="bovino" v-model="inputHamburguer">
                                         <label class="form-check-label" >
                                           Bovino
                                         </label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" value="frango" v-model="inputHamburguer">
                                         <label class="form-check-label" >
                                           Frango
                                         </label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio">
+                                        <input class="form-check-input" type="radio" value="soja" v-model="inputHamburguer">
                                         <label class="form-check-label" >
                                           Soja
                                         </label>
@@ -148,7 +147,10 @@
         const vm = new Vue({
             el: '#app',
             data: {
-                inputTipoPao:''
+                inputTipoPao:'',
+                inputSaladas:[],
+                inputMolhos:[],
+                inputHamburguer:''
             },
             computed: {
                 pao(){
@@ -165,19 +167,44 @@
 
                 },
                 alface(){
+                    if(this.inputSaladas.includes('alface')){
+                        return 'imagens/alface.png'
+                    }
                     return 'imagens/padrao/alface.png'
                 },
                 ketchup(){
+                    if(this.inputMolhos.includes('ketchup')){
+                        return 'imagens/ketchup.png'
+                    }
                     return 'imagens/padrao/molho.png'
                 },
                 mostarda(){
+                    if(this.inputMolhos.includes('mostarda')){
+                        return 'imagens/mostarda.png'
+                    }
                     return 'imagens/padrao/molho.png'
                 },
                 maionese(){
+                    if(this.inputMolhos.includes('maionese')){
+                        return 'imagens/maionese.png'
+                    }
                     return 'imagens/padrao/molho.png'
                 },
                 hamburguer(){
-                    return 'imagens/padrao/hamburguer.png'
+                    switch(this.inputHamburguer){
+                        case 'bovino':
+                            return 'imagens/bovino.png'
+
+                        case 'frango':
+                            return 'imagens/frango.png'
+
+                        case 'soja':
+                            return 'imagens/soja.png'
+
+                        default: 
+                            return 'imagens/padrao/hamburguer.png'
+                    }
+                    
             }
         }
         })
